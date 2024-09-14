@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schizophrenia EEG Classifier</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>EEG Signal Classifier</h1>
+        <p>Submit EEG data and this model will differentiate between healthy 
+            individuals and those with schizophrenia.</p>
+        <form action='/predict' enctype="multipart/form-data" id="uploadForm"  method="POST">
+            <input type="file" id="fileName" name="file" accept=".csv" required>
+            <button type="submit">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="{{ url_for('static', filename='static/script.js') }}"></script>
+</body>
+</html>
