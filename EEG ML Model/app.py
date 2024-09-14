@@ -9,6 +9,7 @@ app = Flask(__name__)
 # Load the Random Forest model
 rf_model = pickle.load(open(r'EEG ML Model/RF_model.pkl', 'rb'))
 lr_model = pickle.load(open(r'EEG ML Model/LR_model.pkl', 'rb'))
+cnn_model = pickle.load(open(r'EEG ML Model/CNN_model.pkl', 'rb'))
 
 # Serve the main HTML page
 @app.route('/')
@@ -34,15 +35,28 @@ def checkModel():
         X = eeg_data.drop(['label', 'file_name'], axis=1)
         Y = eeg_data['label']
 
+        using_cnn = False
         if request.form['submit_btn'] == 'LR':
             prediction = lr_model.predict(X)
         elif request.form['submit_btn'] == 'RF':
             prediction = rf_model.predict(X)
+        elif request.form['submit_btn'] == 'CNN':
+            prediction = cnn_model.predict(X)
 
-        accuracy = accuracy_score(Y, prediction)
-        conf_matrix = confusion_matrix(Y, prediction)
-        # class_report = classification_report(Y, prediction)
-        metrics = precision_recall_fscore_support(Y, prediction, average='macro')
+            using_cnn = True
+
+            accuracy = accuracy_score(Y, prediction.round())
+            conf_matrix = confusion_matrix(Y, prediction.round())
+            # class_report = classification_report(Y, prediction)
+            metrics = precision_recall_fscore_support(Y, prediction.round(), average='macro')
+
+        if not using_cnn:
+            accuracy = accuracy_score(Y, prediction)
+            conf_matrix = confusion_matrix(Y, prediction)
+            # class_report = classification_report(Y, prediction)
+            metrics = precision_recall_fscore_support(Y, prediction, average='macro')
+        
+
         precision = metrics[0]
         recall = metrics[1]
         f1 = metrics[2]
@@ -70,6 +84,8 @@ def predict():
             prediction = rf_model.predict(eeg_data)
         elif request.form['submit_btn'] == 'LR':
             prediction = lr_model.predict(eeg_data)
+        elif request.form['submit_btn'] == 'CNN':
+            prediction = cnn_model.predict(eeg_data)
 
         temp = 0
         for i in prediction.tolist():

@@ -2,8 +2,8 @@ import os
 import pandas as pd
 
 # Paths to the folders
-healthy_folder = "C:\\Users\\nisar\\one drive\\Desktop\\IEEE\\healthy"
-schizophrenic_folder = "C:\\Users\\nisar\\one drive\\Desktop\\IEEE\\schizophrenic"
+healthy_folder = "healthy"
+schizophrenic_folder = "schizophrenic"
 
 # List to store dataframes
 df_list = []

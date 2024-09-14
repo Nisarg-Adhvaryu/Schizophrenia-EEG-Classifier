@@ -8,9 +8,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 </head>
 <body>
     <div class="container">
+        <img src="{{ url_for('static', filename='img.png') }}" alt="Image of Brain" style="width: 180px;margin:0 auto;">
         <h1>EEG Signal Classifier</h1>
         <p>Submit EEG data & choose the model to differentiate between healthy 
             individuals and those with schizophrenia.</p>
@@ -20,12 +22,14 @@
 
             <button type="submit" name='submit_btn' value='RF'>Check by Radom Forest</button>
             <button type="submit" name='submit_btn' value='LR'>Check by Logistic Regression</button>
+            <button type="submit" name='submit_btn' value='CNN'>Check by CNN</button>
         </form>
         <form action='/predict' enctype="multipart/form-data" id="predictForm"  method="POST">
-            <span style="font-size:20px;">Check Yourself:</span> <input type="file" id="fileName" name="file" accept=".csv" required>
+            <span style="font-size:20px;">Test Patient:</span> <input type="file" id="fileName" name="file" accept=".csv" required>
 
             <button type="submit" name='submit_btn' value='RF'>Predict with Radom Forest</button>
             <button type="submit" name='submit_btn' value='LR'>Predict with Logistic Regression</button>
+            <button type="submit" name='submit_btn' value='CNN'>Predict with CNN</button>
         </form>
         <div id="result"></div>
     </div>
