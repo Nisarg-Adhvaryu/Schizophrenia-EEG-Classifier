@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EEG Classifier Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Classification Results</h1>
+        <div class="metrics-container">
+            <!-- Confusion Matrix -->
+            <div class="metric">
+                <h2>Confusion Matrix</h2>
+                <table class="confusion-matrix">
+                    <tr>
+                        <th></th>
+                        <th>Predicted Positive</th>
+                        <th>Predicted Negative</th>
+                    </tr>
+                    <tr>
+                        <th>Actual Positive</th>
+                        <td>{{ confusion_matrix[0][0] }}</td>
+                        <td>{{ confusion_matrix[0][1] }}</td>
+                    </tr>
+                    <tr>
+                        <th>Actual Negative</th>
+                        <td>{{ confusion_matrix[1][0] }}</td>
+                        <td>{{ confusion_matrix[1][1] }}</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- Accuracy, Precision, Recall, F1 Score -->
+            <!-- Model Accuracy -->
+            <div class="allMetrics">
+                <div class="metric">
+                    <h2>Accuracy</h2>
+                    <p>{{ accuracy*100 }}%</p>
+                </div>
+                <div class="metric">
+                    <h2>Precision</h2>
+                    <p>{{ precision*100 }}%</p>
+                </div>
+                <div class="metric">
+                    <h2>Recall</h2>
+                    <p>{{ recall*100 }}%</p>
+                </div>
+                <div class="metric">
+                    <h2>F1-Score</h2>
+                    <p>{{ f1_score*100 }}%</p>
+                </div>
+            </div>
+        </div>
+        <a href="/" class="button">Go Back</a>
+    </div>
+</body>
+</html>
