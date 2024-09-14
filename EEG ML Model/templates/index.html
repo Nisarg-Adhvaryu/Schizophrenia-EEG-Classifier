@@ -12,17 +12,14 @@
 <body>
     <div class="container">
         <h1>EEG Signal Classifier</h1>
-        <p>Submit EEG data and this model will differentiate between healthy 
+        <p>Submit EEG data choose the model to differentiate between healthy 
             individuals and those with schizophrenia.</p>
         <!--Random Forest-->
-        <form action='/predict/rf' enctype="multipart/form-data" id="uploadForm_RF"  method="POST">
+        <form action='/predict' enctype="multipart/form-data" id="uploadForm"  method="POST">
             <input type="file" id="fileName" name="file" accept=".csv" required>
-            <button type="submit">Check by Radom Forest</button>
-        </form>
-        <!--Logistic Regression-->
-        <form action='/predict/lr' enctype="multipart/form-data" id="uploadForm_LR"  method="POST">
-            <input type="file" id="fileName" name="file" accept=".csv" required>
-            <button type="submit">Check by Logistic Regression</button>
+
+            <button type="submit" name='submit_btn' value='RF'>Check by Radom Forest</button>
+            <button type="submit" name='submit_btn' value='LR'>Check by Logistic Regression</button>
         </form>
         <div id="result"></div>
     </div>

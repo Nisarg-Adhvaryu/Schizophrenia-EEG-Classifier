@@ -16,8 +16,8 @@ def home():
     return render_template('index.html')
 
 # Handle the prediction route
-@app.route('/predict/<string:model_type>', methods=['POST'])
-def predict(model_type):
+@app.route('/predict', methods=['POST'])
+def predict():
     file = request.files['file'] # Uploaded file (.csv)
     
     if 'file' not in request.files:
@@ -34,9 +34,9 @@ def predict(model_type):
         X = eeg_data.drop(['label', 'file_name'], axis=1)
         Y = eeg_data['label']
 
-        if model_type == 'lr':
+        if request.form['submit_btn'] == 'LR':
             prediction = lr_model.predict(X)
-        elif model_type == 'rf':
+        elif request.form['submit_btn'] == 'RF':
             prediction = rf_model.predict(X)
 
         accuracy = accuracy_score(Y, prediction)
