@@ -37,4 +37,4 @@ This project focuses on classifying EEG signals to detect schizophrenia using va
 ## Authors
 - Aditya Mehta
 - [Ayush Singh](https://github.com/Ayush181005)
-- [Nisarg Adhwaryu](https://github.com/Nisarg-Adhvaryu)
+- [Nisarg Adhvaryu](https://github.com/Nisarg-Adhvaryu)
